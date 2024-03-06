@@ -6,7 +6,7 @@ session_start();
 <link rel="stylesheet" href=" <?= asset('assets/css/style.css') ?>" media="all" type="text/css">
 <nav class="navbar navbar-expand-lg navbar-dark bg-blue ">
 
-    <a class="navbar-brand " href="<?= url('panel') ?>">Blog PHP</a>
+    <a class="navbar-brand " href="<?= url('panel') ?>">BLOG</a>
     <button class="navbar-toggler " type="button " data-toggle="collapse " data-target="#navbarSupportedContent "
             aria-controls="navbarSupportedContent " aria-expanded="false " aria-label="Toggle navigation ">
         <span class="navbar-toggler-icon "></span>
@@ -28,7 +28,7 @@ session_start();
                 ?>
 
                 <li class="nav-item ">
-                    <a class="nav-link " href=""><?= $category->name ?></a>
+                    <a class="nav-link " href="<?= url('category.php?cat_id=') . $category->id ?>"><?= $category->name ?></a>
                 </li>
 
             <?php } ?>

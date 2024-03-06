@@ -40,7 +40,7 @@ require_once '../../functions/check-login.php';
                     <table class="table table-striped table-">
                         <thead>
                         <tr>
-                            <th>#</th>
+                            <th>id</th>
                             <th>image</th>
                             <th>title</th>
                             <th>cat_name</th>

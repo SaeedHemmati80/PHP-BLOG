@@ -33,7 +33,8 @@ if(
     $stmt-> execute([$_POST['cat_id']]);
     $category = $stmt->fetch();
 
-    if(isset($_FILES['image']) && $_FILES['image'] !== ''){
+    // For uploaded image
+    if(isset($_FILES['image']) && $_FILES['image']['name'] !== ''){
         $allow_extension = ['png', 'jpg', 'jpeg', 'gif'];
         $image_extension = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
 
@@ -42,7 +43,6 @@ if(
         }
 
         $base_path = dirname(dirname(__DIR__));
-
         // exist image
         if(file_exists($base_path . $post->image)){
             unlink($base_path . $post->image);
@@ -58,8 +58,7 @@ if(
             $stmt-> execute([$_POST['title'],$_POST['cat_id'],$_POST['body'], $image, $_GET['post_id']]);
 
         }
-    }
-    else{
+    }else{
         if($category !== false){
 
             $sql = "UPDATE php_blog.posts SET title=?, cat_id=?, body=?, updated_at = NOW() WHERE id=?;";
@@ -103,7 +102,7 @@ if(
             </section>
             <section class="col-md-10 pt-3">
 
-                <form action="<?= url('panel/post/edit.php?post_id=') . $_GET['post_id'] ?>" method="post" enctype="multipart/form-data">
+                <form action="<?= url('panel/post/edit.php?post_id=' . $_GET['post_id'])?>" method="post" enctype="multipart/form-data">
                     <section class="form-group">
                         <label for="title">Title</label>
                         <input type="text" class="form-control" name="title" id="title"
@@ -136,7 +135,7 @@ if(
                     <section class="form-group">
                         <label for="body">Body</label>
                         <textarea class="form-control" name="body" id="body" rows="5"
-                                  placeholder="body ..."></textarea>
+                                  placeholder="body ..."><?= $post->body ?></textarea>
                     </section>
                     <section class="form-group">
                         <button type="submit" class="btn btn-primary">Update</button>

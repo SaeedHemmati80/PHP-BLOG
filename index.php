@@ -10,7 +10,7 @@ global $conn;
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>PHP tutorial</title>
+    <title>PHP Blog</title>
     <link rel="stylesheet" href="<?= asset('assets/css/bootstrap.min.css') ?>" media="all" type="text/css">
     <link rel="stylesheet" href=" <?= asset('assets/css/style.css') ?>" media="all" type="text/css">
 </head>
@@ -30,14 +30,14 @@ global $conn;
 
             foreach ($posts as $post) {
                 ?>
-                <section class="col-md-4">
-                    <section class="mb-2 overflow-hidden" style="height: 300px; width: 300px">
-                        <img class="img-fluid" style="width: 300px; height: 300px" src="<?= asset($post->image) ?>"
+                <section class="col-md-2">
+                    <section class="mb-2 overflow-hidden" style="height: 200px; width: 150px">
+                        <img class="img-fluid" style="width: 100%; height: 100%" src="<?= asset($post->image) ?>"
                              alt="">
                     </section>
                     <h2 class="h5 text-truncate"><?= $post->title ?></h2>
-                    <p><?= substr($post->body, 0, 35) ?></p>
-                    <p><a class="btn btn-primary" href="" role="button">View details »</a></p>
+                    <p><?= substr($post->body, 0, 15) . '...' ?></p>
+                    <p><a class="btn btn-primary" href="<?= url('detail.php?post_id=') . $post->id ?>" role="button">View details »</a></p>
                 </section>
             <?php } ?>
 
