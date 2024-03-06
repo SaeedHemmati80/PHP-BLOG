@@ -1,6 +1,7 @@
 <?php
 require_once 'functions/helper.php';
 require_once 'functions/pdo_connection.php';
+global $conn;
 ?>
 
 
@@ -21,19 +22,30 @@ require_once 'functions/pdo_connection.php';
     <section class="container my-5">
         <!-- Example row of columns -->
         <section class="row">
+            <?php
+            $sql = 'select * from php_blog.posts where status = 1;';
+            $stmt = $conn->prepare($sql);
+            $stmt->execute();
+            $posts = $stmt->fetchAll();
 
-            <section class="col-md-4">
-                <section class="mb-2 overflow-hidden" style="max-height: 15rem;"><img class="img-fluid" src="" alt=""></section>
-                <h2 class="h5 text-truncate">title</h2>
-                <p>body</p>
-                <p><a class="btn btn-primary" href="" role="button">View details »</a></p>
-            </section>
+            foreach ($posts as $post) {
+                ?>
+                <section class="col-md-4">
+                    <section class="mb-2 overflow-hidden" style="height: 300px; width: 300px">
+                        <img class="img-fluid" style="width: 300px; height: 300px" src="<?= asset($post->image) ?>"
+                             alt="">
+                    </section>
+                    <h2 class="h5 text-truncate"><?= $post->title ?></h2>
+                    <p><?= substr($post->body, 0, 35) ?></p>
+                    <p><a class="btn btn-primary" href="" role="button">View details »</a></p>
+                </section>
+            <?php } ?>
 
         </section>
     </section>
 
 </section>
-<script src=" <?= asset('assets/js/jquery.min.js')?>"> </script>
+<script src=" <?= asset('assets/js/jquery.min.js') ?>"></script>
 <script src=" <?= asset('assets/js/bootstrap.min.js') ?>"></script>
 </body>
 </html>
