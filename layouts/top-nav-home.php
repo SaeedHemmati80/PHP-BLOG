@@ -47,11 +47,5 @@ session_start();
         <a class="text-decoration-none text-white " href="<?= url('auth/login.php') ?>">Login</a>
 
         <?php } ?>
-
-
-
-
-
-
     </section>
 </nav>
